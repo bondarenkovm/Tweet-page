@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/721.39388145.chunk.js","mappings":"gIAIA,UAJA,WACE,OAAOA,EAAAA,EAAAA,KAAA,MAAAC,SAAI,UACb,C","sources":["pages/Tweets.jsx"],"sourcesContent":["function Tweets() {\r\n  return <h1>Tweets</h1>;\r\n}\r\n\r\nexport default Tweets;\r\n"],"names":["_jsx","children"],"sourceRoot":""}
