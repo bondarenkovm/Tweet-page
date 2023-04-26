@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchUsers, addContact, deleteContact } from './operations';
+import { fetchUsers, changeNumberFollowers } from './operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -25,24 +25,19 @@ const usersSlice = createSlice({
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(fetchUsers.rejected, handleRejected),
-  // .addCase(addContact.pending, handlePending)
-  // .addCase(addContact.fulfilled, (state, action) => {
-  //   state.isLoading = false;
-  //   state.error = null;
-  //   state.items.push(action.payload);
-  // })
-  // .addCase(addContact.rejected, handleRejected)
-  // .addCase(deleteContact.pending, handlePending)
-  // .addCase(deleteContact.fulfilled, (state, action) => {
-  //   state.isLoading = false;
-  //   state.error = null;
-  //   const index = state.items.findIndex(
-  //     contact => contact.id === action.payload.id
-  //   );
-  //   state.items.splice(index, 1);
-  // })
-  // .addCase(deleteContact.rejected, handleRejected),
+      .addCase(fetchUsers.rejected, handleRejected)
+      .addCase(changeNumberFollowers.pending, handlePending)
+      .addCase(changeNumberFollowers.fulfilled, (state, { payload }) => {
+        state.items = state.items.map(user => {
+          if (user.id === payload.id) {
+            return { ...user, followers: payload.followers };
+          }
+          return user;
+        });
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addCase(changeNumberFollowers.rejected, handleRejected),
 });
 
 export const usersReducer = usersSlice.reducer;

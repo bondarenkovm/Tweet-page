@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectUsers,
-  // selectLoading,
-  // selectError,
+  selectFollowing,
+  selectLoading,
+  selectError,
 } from 'redux/selectors';
-import { useEffect } from 'react';
-import { fetchUsers, deleteContact } from 'redux/operations';
+import { useEffect, useState } from 'react';
+import { fetchUsers, changeNumberFollowers } from 'redux/operations';
 
 import {
   List,
@@ -17,61 +18,91 @@ import {
   UserAvatar,
   Text,
   Button,
+  LoadButton,
 } from './UsersList.styled';
 import logo from '../../img/Logo.png';
 import picture from '../../img/picture.png';
-import hansel from '../../img/Hansel.png';
 
-// import { ThreeDots } from 'react-loader-spinner';
+import { addFollowing, removeFollowing } from 'redux/followingSlice';
+
+import { TailSpin } from 'react-loader-spinner';
 
 function UsersList() {
-  const users = useSelector(selectUsers);
-  // const isLoading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
   const dispatch = useDispatch();
+
+  const users = useSelector(selectUsers);
+  const following = useSelector(selectFollowing);
+  const isLoading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+
+  const [perPage, setPerPage] = useState(3);
+  const pageUsers = users.slice(0, perPage);
+
+  function loadMore() {
+    setPerPage(perPage + 3);
+  }
+
+  const сlickFollowBtn = ({ id, followers }) => {
+    const activeFollower = following.includes(id);
+
+    if (activeFollower) {
+      dispatch(removeFollowing(id));
+      dispatch(changeNumberFollowers({ id, followers: followers - 1 }));
+    }
+    if (!activeFollower) {
+      dispatch(addFollowing(id));
+      dispatch(changeNumberFollowers({ id, followers: followers + 1 }));
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  // const delContact = id => {
-  //   dispatch(deleteContact(id));
-  // };
-
   return (
     <>
-      {/* {isLoading && !error && (
-        <ThreeDots
-          height="40"
-          width="40"
-          radius="9"
+      {isLoading && !error && (
+        <TailSpin
+          height="80"
+          width="80"
           color="#4fa94d"
-          ariaLabel="three-dots-loading"
+          ariaLabel="tail-spin-loading"
+          radius="1"
           wrapperStyle={{}}
-          wrapperClassName=""
+          wrapperClass="loader"
           visible={true}
         />
-      )} */}
-      {/* {isLoading && !error && <div>Loading...</div>} */}
+      )}
       <List>
-        {users.map(({ id, user, avatar, followers, tweets }) => {
+        {pageUsers.map(({ id, user, avatar, followers, tweets }) => {
           return (
             <Item key={id}>
               <BgLogo src={logo} alt="Logo GoIT" />
               <BgImage src={picture} alt="picture" />
               <UserWrapper>
                 <UserBorder />
-                <UserAvatar src={hansel} alt={user} />
+                <UserAvatar src={avatar} alt={user} />
               </UserWrapper>
-              {/* <p>{user}</p>
-              <p>{avatar}</p> */}
               <Text>{tweets} tweets</Text>
               <Text>{followers.toLocaleString('en-US')} Followers</Text>
-              <Button type="button">Delete</Button>
+              <Button
+                active={following.includes(id)}
+                type="button"
+                onClick={() => {
+                  сlickFollowBtn({ id, followers });
+                }}
+              >
+                {following.includes(id) ? 'Following' : 'Follow'}
+              </Button>
             </Item>
           );
         })}
       </List>
+      {pageUsers.length < users.length && (
+        <LoadButton type="button" onClick={loadMore}>
+          Load More
+        </LoadButton>
+      )}
     </>
   );
 }
