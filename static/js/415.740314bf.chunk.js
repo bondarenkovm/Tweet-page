@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunktweet_page=self.webpackChunktweet_page||[]).push([[415],{5415:function(e,t,n){n.r(t);var i=n(184);t.default=function(){return(0,i.jsx)("h1",{children:"Sorry, this page is not yet filled with content."})}}}]);
+//# sourceMappingURL=415.740314bf.chunk.js.map

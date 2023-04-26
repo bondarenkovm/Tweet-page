@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/415.740314bf.chunk.js","mappings":"iIAIA,UAJA,WACE,OAAOA,EAAAA,EAAAA,KAAA,MAAAC,SAAI,oDACb,C","sources":["pages/Home.jsx"],"sourcesContent":["function Home() {\r\n  return <h1>Sorry, this page is not yet filled with content.</h1>;\r\n}\r\n\r\nexport default Home;\r\n"],"names":["_jsx","children"],"sourceRoot":""}
