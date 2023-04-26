@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Tweets
 
 ---
@@ -19,3 +20,8 @@ The following libraries are used in the project:
 - redux-persist;
 - emotion/styled;
 - axios;
+=======
+Tweets
+
+The application was created using Create React App.
+>>>>>>> 1912fe9c20362cc46e3b3ef26d8ac712b7d0a5f5
