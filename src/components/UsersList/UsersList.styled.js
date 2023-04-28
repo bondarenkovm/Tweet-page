@@ -80,7 +80,6 @@ export const Text = styled.p`
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
-  font-family: 'Montserrat';
   text-transform: uppercase;
   color: #ebd8ff;
   margin: 0;
@@ -117,11 +116,11 @@ export const LoadButton = styled.button`
   color: #fff;
   border: 0;
   text-decoration: none;
-  cursor: pointer;
   font-family: inherit;
   font-size: 18px;
   line-height: 24px;
   font-style: normal;
+  font-family: 'Montserrat';
   font-weight: 500;
   min-width: 180px;
   margin: 20px auto;
