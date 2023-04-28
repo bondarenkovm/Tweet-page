@@ -21,7 +21,6 @@ import {
   LoadButton,
 } from './UsersList.styled';
 import logo from '../../img/Logo.png';
-import picture from '../../img/picture.png';
 
 import { addFollowing, removeFollowing } from 'redux/followingSlice';
 
@@ -78,7 +77,7 @@ function UsersList() {
           return (
             <Item key={id}>
               <BgLogo src={logo} alt="Logo GoIT" />
-              <BgImage src={picture} alt="picture" />
+              <BgImage />
               <UserWrapper>
                 <UserBorder />
                 <UserAvatar src={avatar} alt={user} />

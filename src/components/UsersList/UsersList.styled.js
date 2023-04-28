@@ -1,3 +1,4 @@
+import picture from '../../img/picture.png';
 import styled from '@emotion/styled';
 
 export const List = styled.ul`
@@ -28,18 +29,22 @@ export const BgLogo = styled.img`
   left: 20px;
   top: 20px;
 `;
-export const BgImage = styled.img`
-  margin: 28px 36px 0px;
+export const BgImage = styled.div`
+  width: 380px;
+  height: 210px;
+  background-image: url(${picture});
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 export const UserWrapper = styled.div`
   position: relative;
-  height: 40px;
+  height: 10px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 46px;
+  margin-bottom: 60px;
   :after {
     content: '';
     width: 100%;
